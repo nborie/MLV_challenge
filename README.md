@@ -29,11 +29,17 @@ https://nborie.github.io/MLV_challenge/doc/html/ )
 
 * 100 Méga-octets max de mémoire par A.I. (c'est déjà énormisime).
 * Les A.I. seront disqualifiées si elle ralentissent le programme.
-* On ne triche pas en essayant de passer au dessus de l'A.P.I.
-* On gagne quoi qu'il arrive le droit de rejouer (quelle classe quand même...)
+* On ne triche pas en essayant de passer au dessus de l'A.P.I. (seules
+  les fonctions publiées du module acquisition.h sont autorisées).
+* On gagne quoi qu'il arrive le droit de rejouer (quelle classe quand
+  même...)
 * Je vais bien finir par trouver des lots (tasse UPEM, clé usb, ...)
-* Votre A.I. doit être le plus performante possible en 1 vs 1, 2 vs 2 et 3 vs 3.
-* Tout le code dégueulasse (de 2014 je crois...) est ici publiquement sur github
+* Votre A.I. doit être le plus performante possible en 1 vs 1, 2 vs 2
+  et 3 vs 3.
+* Tout le code dégueulasse (de 2014 je crois...) est ici publiquement
+  sur github
+* Il n'y a que trois fonctions à écrire, votre vaisseau doit prendre
+  une décision à chaque frame.
 * Si vous avez des propositions d'amélioration intéressante qui ne
   casse pas la challenge, je regarderai soigneusement les pull requests !
 
