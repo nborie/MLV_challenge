@@ -1,17 +1,17 @@
 # MLV_challenge
 
 
-Le corona challenge pour calmer les gens énervés durant le confinement...
+Le corona challenge, pour calmer les gens énervés durant le confinement...
 
 
 ## Qu'est ce que c'est que cette ânerie ?
 
 
-C'est une vieille arène de robot dans l'espace codé en libMLV. Ça a
+C'est une vieille arène de robots dans l'espace codée en libMLV. Ça a
 failli devenir un projet L3 mais ça aurait été un trop petit projet
 sans devoir coder l'arène. En rajoutant l'arène dans le sujet, les
 élèves n'aurait pas produit des A.I. interopérables toutes ensembles
-car spécifiée complètement une arène est chose... difficile.
+car spécifier complètement une arène est chose... difficile.
 
 
 Comme je sens que le confinement vous énerve, venez donc coder une
@@ -21,19 +21,20 @@ A.I. pour prouver que vous n'êtes pas des informaticiens de niveau 1.
 Vous avez besoin de la libMLV pour installer l'arène et les A.I. de
 démonstration. Il suffit de faire make pour construire tout le
 projet. Une vieille documentation horrible (qui n'a jamais été
-terminée est disponible ici :
-https://nborie.github.io/MLV_challenge/doc/html/ )
+terminée est disponible ici (cette vieille doc n'est rien d'autre
+qu'un début de doxygen inclus dans le dépôt):
+https://nborie.github.io/MLV_challenge/doc/html/
 
 
 ## Quelques règles... 
 
 
-les règles sont susceptibles d'évoluer légèrement pour le bien du challenge...
+les règles sont susceptibles d'évoluer légèrement seulement pour le
+bien du challenge...
 
 
 * 100 Méga-octets max de mémoire par A.I. (c'est déjà énorme!!!).
-* Les A.I. seront disqualifiées si elle ralentissent le programme,
-  l'arène.
+* Les A.I. seront disqualifiées si elle ralentissent le programme.
 * On ne triche pas en essayant de passer au dessus de l'A.P.I. (seules
   les fonctions publiées du module acquisition.h sont autorisées).
 * On gagne quoi qu'il arrive le droit de rejouer (quelle classe quand
@@ -41,7 +42,7 @@ les règles sont susceptibles d'évoluer légèrement pour le bien du challenge.
 * Je vais bien finir par trouver des lots (tasses UPEM, clé usb, vieux
   goodies, ...)
 * Votre A.I. doit être la plus performante possible en 1 vs 1, 2 vs 2
-  et 3 vs 3 (sauf peut-être pas tirer n'importe comment...).
+  et 3 vs 3 (peut-être qu'il ne faut pas tirer n'importe comment...).
 * Il y a du friendly fire. 
 * Tout le code dégueulasse (de 2014 je crois...) de l'arène est ici
   publiquement sur github.
@@ -51,6 +52,7 @@ les règles sont susceptibles d'évoluer légèrement pour le bien du challenge.
   casse pas la challenge, je regarderai soigneusement les pull requests !
 * Les exemples d'A.I. triviales et moches peuvent vous aider pour
   savoir comment interagir poliment avec l'arène.
+* La vision est en cône infini, selon un radar orientable.
 
 
 ## Le timing
