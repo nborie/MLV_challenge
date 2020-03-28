@@ -1,0 +1,380 @@
+Flat profile:
+
+Each sample counts as 0.01 seconds.
+  %   cumulative   self              self     total           
+ time   seconds   seconds    calls  ms/call  ms/call  name    
+100.04    623.43   623.43     1394   447.22   447.22  display_menu
+  0.00    623.43     0.00    30274     0.00     0.00  scale_point
+  0.00    623.43     0.00     6463     0.00     0.00  collision_starship_wall
+  0.00    623.43     0.00     6463     0.00     0.00  draw_starship
+  0.00    623.43     0.00     6463     0.00     0.00  move_starship
+  0.00    623.43     0.00     3986     0.00     0.00  draw_missile
+  0.00    623.43     0.00     2789     0.00     0.00  get_absolute_time
+  0.00    623.43     0.00     1404     0.00     0.00  erase_graphical_window
+  0.00    623.43     0.00     1394     0.00     0.00  collision_between_starships
+  0.00    623.43     0.00     1394     0.00     0.00  collision_starship_missile
+  0.00    623.43     0.00     1394     0.00     0.00  collision_starships_wall
+  0.00    623.43     0.00     1394     0.00     0.00  decision_maker_starship
+  0.00    623.43     0.00     1394     0.00     0.00  display_fps
+  0.00    623.43     0.00     1394     0.00     0.00  draw_explosions
+  0.00    623.43     0.00     1394     0.00     0.00  draw_missiles
+  0.00    623.43     0.00     1394     0.00   447.22  draw_space
+  0.00    623.43     0.00     1394     0.00     0.00  draw_starships
+  0.00    623.43     0.00     1394     0.00     0.00  end_frame_resolution
+  0.00    623.43     0.00     1394     0.00     0.00  has_winner_team
+  0.00    623.43     0.00     1394     0.00     0.00  move_missiles
+  0.00    623.43     0.00     1394     0.00     0.00  move_starships
+  0.00    623.43     0.00     1394     0.00     0.00  relaod_starships_gun
+  0.00    623.43     0.00     1394     0.00     0.00  resolve_explosion
+  0.00    623.43     0.00     1394     0.00     0.00  save_frame_information
+  0.00    623.43     0.00      436     0.00     0.00  draw_explosion
+  0.00    623.43     0.00      132     0.00     0.00  create_missile
+  0.00    623.43     0.00      132     0.00     0.00  shot_starship
+  0.00    623.43     0.00       16     0.00     0.00  add_explosion
+  0.00    623.43     0.00       16     0.00     0.00  create_small_explosion
+  0.00    623.43     0.00       14     0.00     0.00  nb_sharship_in_game
+  0.00    623.43     0.00       10     0.00     0.00  draw_selection_space
+  0.00    623.43     0.00       10     0.00     0.00  nb_team_in_game
+  0.00    623.43     0.00        5     0.00     0.00  create_starship
+  0.00    623.43     0.00        5     0.00     0.00  get_random_position_without_colision
+  0.00    623.43     0.00        2     0.00     0.00  clean_plugins
+  0.00    623.43     0.00        1     0.00     0.00  create_graphical_window
+  0.00    623.43     0.00        1     0.00     0.00  display_win
+  0.00    623.43     0.00        1     0.00     0.00  draw_introduction
+  0.00    623.43     0.00        1     0.00     0.00  free_graphical_paramters
+  0.00    623.43     0.00        1     0.00     0.00  free_graphical_window
+  0.00    623.43     0.00        1     0.00     0.00  free_space
+  0.00    623.43     0.00        1     0.00     0.00  initialize_graphical_paramters
+  0.00    623.43     0.00        1     0.00     0.00  initialize_graphical_paramters_extra
+  0.00    623.43     0.00        1     0.00     0.00  initialize_plugins
+
+ %         the percentage of the total running time of the
+time       program used by this function.
+
+cumulative a running sum of the number of seconds accounted
+ seconds   for by this function and those listed above it.
+
+ self      the number of seconds accounted for by this
+seconds    function alone.  This is the major sort for this
+           listing.
+
+calls      the number of times this function was invoked, if
+           this function is profiled, else blank.
+ 
+ self      the average number of milliseconds spent in this
+ms/call    function per call, if this function is profiled,
+	   else blank.
+
+ total     the average number of milliseconds spent in this
+ms/call    function and its descendents per call, if this 
+	   function is profiled, else blank.
+
+name       the name of the function.  This is the minor sort
+           for this listing. The index shows the location of
+	   the function in the gprof listing. If the index is
+	   in parenthesis it shows where it would appear in
+	   the gprof listing if it were to be printed.
+
+Copyright (C) 2012 Free Software Foundation, Inc.
+
+Copying and distribution of this file, with or without modification,
+are permitted in any medium without royalty provided the copyright
+notice and this notice are preserved.
+
+		     Call graph (explanation follows)
+
+
+granularity: each sample hit covers 2 byte(s) for 0.00% of 623.43 seconds
+
+index % time    self  children    called     name
+              623.43    0.00    1394/1394        draw_space [2]
+[1]    100.0  623.43    0.00    1394         display_menu [1]
+-----------------------------------------------
+                0.00  623.43    1394/1394        main [3]
+[2]    100.0    0.00  623.43    1394         draw_space [2]
+              623.43    0.00    1394/1394        display_menu [1]
+                0.00    0.00    1394/1404        erase_graphical_window [10]
+                0.00    0.00    1394/1394        draw_starships [18]
+                0.00    0.00    1394/1394        draw_missiles [17]
+                0.00    0.00    1394/1394        draw_explosions [16]
+                0.00    0.00    1394/1394        display_fps [15]
+-----------------------------------------------
+                                                 <spontaneous>
+[3]    100.0    0.00  623.43                 main [3]
+                0.00  623.43    1394/1394        draw_space [2]
+                0.00    0.00    2789/2789        get_absolute_time [9]
+                0.00    0.00    1394/1394        save_frame_information [25]
+                0.00    0.00    1394/1394        end_frame_resolution [19]
+                0.00    0.00      10/10          draw_selection_space [32]
+                0.00    0.00       2/2           clean_plugins [36]
+                0.00    0.00       1/1           initialize_graphical_paramters [43]
+                0.00    0.00       1/1           create_graphical_window [37]
+                0.00    0.00       1/1           draw_introduction [39]
+                0.00    0.00       1/1           initialize_plugins [45]
+                0.00    0.00       1/1           display_win [38]
+                0.00    0.00       1/1           free_graphical_window [41]
+                0.00    0.00       1/1           free_space [42]
+-----------------------------------------------
+                0.00    0.00     436/30274       draw_explosion [26]
+                0.00    0.00    3986/30274       draw_missile [8]
+                0.00    0.00   25852/30274       draw_starship [6]
+[4]      0.0    0.00    0.00   30274         scale_point [4]
+-----------------------------------------------
+                0.00    0.00    6463/6463        collision_starships_wall [13]
+[5]      0.0    0.00    0.00    6463         collision_starship_wall [5]
+-----------------------------------------------
+                0.00    0.00    6463/6463        draw_starships [18]
+[6]      0.0    0.00    0.00    6463         draw_starship [6]
+                0.00    0.00   25852/30274       scale_point [4]
+-----------------------------------------------
+                0.00    0.00    6463/6463        move_starships [22]
+[7]      0.0    0.00    0.00    6463         move_starship [7]
+-----------------------------------------------
+                0.00    0.00    3986/3986        draw_missiles [17]
+[8]      0.0    0.00    0.00    3986         draw_missile [8]
+                0.00    0.00    3986/30274       scale_point [4]
+-----------------------------------------------
+                0.00    0.00    2789/2789        main [3]
+[9]      0.0    0.00    0.00    2789         get_absolute_time [9]
+-----------------------------------------------
+                0.00    0.00      10/1404        draw_selection_space [32]
+                0.00    0.00    1394/1404        draw_space [2]
+[10]     0.0    0.00    0.00    1404         erase_graphical_window [10]
+-----------------------------------------------
+                0.00    0.00    1394/1394        end_frame_resolution [19]
+[11]     0.0    0.00    0.00    1394         collision_between_starships [11]
+-----------------------------------------------
+                0.00    0.00    1394/1394        end_frame_resolution [19]
+[12]     0.0    0.00    0.00    1394         collision_starship_missile [12]
+                0.00    0.00      16/16          create_small_explosion [30]
+                0.00    0.00      16/16          add_explosion [29]
+-----------------------------------------------
+                0.00    0.00    1394/1394        end_frame_resolution [19]
+[13]     0.0    0.00    0.00    1394         collision_starships_wall [13]
+                0.00    0.00    6463/6463        collision_starship_wall [5]
+-----------------------------------------------
+                0.00    0.00    1394/1394        end_frame_resolution [19]
+[14]     0.0    0.00    0.00    1394         decision_maker_starship [14]
+                0.00    0.00     132/132         shot_starship [28]
+-----------------------------------------------
+                0.00    0.00    1394/1394        draw_space [2]
+[15]     0.0    0.00    0.00    1394         display_fps [15]
+-----------------------------------------------
+                0.00    0.00    1394/1394        draw_space [2]
+[16]     0.0    0.00    0.00    1394         draw_explosions [16]
+                0.00    0.00     436/436         draw_explosion [26]
+-----------------------------------------------
+                0.00    0.00    1394/1394        draw_space [2]
+[17]     0.0    0.00    0.00    1394         draw_missiles [17]
+                0.00    0.00    3986/3986        draw_missile [8]
+-----------------------------------------------
+                0.00    0.00    1394/1394        draw_space [2]
+[18]     0.0    0.00    0.00    1394         draw_starships [18]
+                0.00    0.00    6463/6463        draw_starship [6]
+-----------------------------------------------
+                0.00    0.00    1394/1394        main [3]
+[19]     0.0    0.00    0.00    1394         end_frame_resolution [19]
+                0.00    0.00    1394/1394        decision_maker_starship [14]
+                0.00    0.00    1394/1394        move_starships [22]
+                0.00    0.00    1394/1394        move_missiles [21]
+                0.00    0.00    1394/1394        relaod_starships_gun [23]
+                0.00    0.00    1394/1394        collision_starships_wall [13]
+                0.00    0.00    1394/1394        collision_between_starships [11]
+                0.00    0.00    1394/1394        resolve_explosion [24]
+                0.00    0.00    1394/1394        collision_starship_missile [12]
+                0.00    0.00    1394/1394        has_winner_team [20]
+-----------------------------------------------
+                0.00    0.00    1394/1394        end_frame_resolution [19]
+[20]     0.0    0.00    0.00    1394         has_winner_team [20]
+-----------------------------------------------
+                0.00    0.00    1394/1394        end_frame_resolution [19]
+[21]     0.0    0.00    0.00    1394         move_missiles [21]
+-----------------------------------------------
+                0.00    0.00    1394/1394        end_frame_resolution [19]
+[22]     0.0    0.00    0.00    1394         move_starships [22]
+                0.00    0.00    6463/6463        move_starship [7]
+-----------------------------------------------
+                0.00    0.00    1394/1394        end_frame_resolution [19]
+[23]     0.0    0.00    0.00    1394         relaod_starships_gun [23]
+-----------------------------------------------
+                0.00    0.00    1394/1394        end_frame_resolution [19]
+[24]     0.0    0.00    0.00    1394         resolve_explosion [24]
+-----------------------------------------------
+                0.00    0.00    1394/1394        main [3]
+[25]     0.0    0.00    0.00    1394         save_frame_information [25]
+-----------------------------------------------
+                0.00    0.00     436/436         draw_explosions [16]
+[26]     0.0    0.00    0.00     436         draw_explosion [26]
+                0.00    0.00     436/30274       scale_point [4]
+-----------------------------------------------
+                0.00    0.00     132/132         shot_starship [28]
+[27]     0.0    0.00    0.00     132         create_missile [27]
+-----------------------------------------------
+                0.00    0.00     132/132         decision_maker_starship [14]
+[28]     0.0    0.00    0.00     132         shot_starship [28]
+                0.00    0.00     132/132         create_missile [27]
+-----------------------------------------------
+                0.00    0.00      16/16          collision_starship_missile [12]
+[29]     0.0    0.00    0.00      16         add_explosion [29]
+-----------------------------------------------
+                0.00    0.00      16/16          collision_starship_missile [12]
+[30]     0.0    0.00    0.00      16         create_small_explosion [30]
+-----------------------------------------------
+                0.00    0.00      14/14          draw_selection_space [32]
+[31]     0.0    0.00    0.00      14         nb_sharship_in_game [31]
+-----------------------------------------------
+                0.00    0.00      10/10          main [3]
+[32]     0.0    0.00    0.00      10         draw_selection_space [32]
+                0.00    0.00      14/14          nb_sharship_in_game [31]
+                0.00    0.00      10/1404        erase_graphical_window [10]
+                0.00    0.00      10/10          nb_team_in_game [33]
+                0.00    0.00       5/5           create_starship [34]
+-----------------------------------------------
+                0.00    0.00      10/10          draw_selection_space [32]
+[33]     0.0    0.00    0.00      10         nb_team_in_game [33]
+-----------------------------------------------
+                0.00    0.00       5/5           draw_selection_space [32]
+[34]     0.0    0.00    0.00       5         create_starship [34]
+                0.00    0.00       5/5           get_random_position_without_colision [35]
+-----------------------------------------------
+                0.00    0.00       5/5           create_starship [34]
+[35]     0.0    0.00    0.00       5         get_random_position_without_colision [35]
+-----------------------------------------------
+                0.00    0.00       2/2           main [3]
+[36]     0.0    0.00    0.00       2         clean_plugins [36]
+-----------------------------------------------
+                0.00    0.00       1/1           main [3]
+[37]     0.0    0.00    0.00       1         create_graphical_window [37]
+                0.00    0.00       1/1           initialize_graphical_paramters_extra [44]
+-----------------------------------------------
+                0.00    0.00       1/1           main [3]
+[38]     0.0    0.00    0.00       1         display_win [38]
+-----------------------------------------------
+                0.00    0.00       1/1           main [3]
+[39]     0.0    0.00    0.00       1         draw_introduction [39]
+-----------------------------------------------
+                0.00    0.00       1/1           free_graphical_window [41]
+[40]     0.0    0.00    0.00       1         free_graphical_paramters [40]
+-----------------------------------------------
+                0.00    0.00       1/1           main [3]
+[41]     0.0    0.00    0.00       1         free_graphical_window [41]
+                0.00    0.00       1/1           free_graphical_paramters [40]
+-----------------------------------------------
+                0.00    0.00       1/1           main [3]
+[42]     0.0    0.00    0.00       1         free_space [42]
+-----------------------------------------------
+                0.00    0.00       1/1           main [3]
+[43]     0.0    0.00    0.00       1         initialize_graphical_paramters [43]
+-----------------------------------------------
+                0.00    0.00       1/1           create_graphical_window [37]
+[44]     0.0    0.00    0.00       1         initialize_graphical_paramters_extra [44]
+-----------------------------------------------
+                0.00    0.00       1/1           main [3]
+[45]     0.0    0.00    0.00       1         initialize_plugins [45]
+-----------------------------------------------
+
+ This table describes the call tree of the program, and was sorted by
+ the total amount of time spent in each function and its children.
+
+ Each entry in this table consists of several lines.  The line with the
+ index number at the left hand margin lists the current function.
+ The lines above it list the functions that called this function,
+ and the lines below it list the functions this one called.
+ This line lists:
+     index	A unique number given to each element of the table.
+		Index numbers are sorted numerically.
+		The index number is printed next to every function name so
+		it is easier to look up where the function is in the table.
+
+     % time	This is the percentage of the `total' time that was spent
+		in this function and its children.  Note that due to
+		different viewpoints, functions excluded by options, etc,
+		these numbers will NOT add up to 100%.
+
+     self	This is the total amount of time spent in this function.
+
+     children	This is the total amount of time propagated into this
+		function by its children.
+
+     called	This is the number of times the function was called.
+		If the function called itself recursively, the number
+		only includes non-recursive calls, and is followed by
+		a `+' and the number of recursive calls.
+
+     name	The name of the current function.  The index number is
+		printed after it.  If the function is a member of a
+		cycle, the cycle number is printed between the
+		function's name and the index number.
+
+
+ For the function's parents, the fields have the following meanings:
+
+     self	This is the amount of time that was propagated directly
+		from the function into this parent.
+
+     children	This is the amount of time that was propagated from
+		the function's children into this parent.
+
+     called	This is the number of times this parent called the
+		function `/' the total number of times the function
+		was called.  Recursive calls to the function are not
+		included in the number after the `/'.
+
+     name	This is the name of the parent.  The parent's index
+		number is printed after it.  If the parent is a
+		member of a cycle, the cycle number is printed between
+		the name and the index number.
+
+ If the parents of the function cannot be determined, the word
+ `<spontaneous>' is printed in the `name' field, and all the other
+ fields are blank.
+
+ For the function's children, the fields have the following meanings:
+
+     self	This is the amount of time that was propagated directly
+		from the child into the function.
+
+     children	This is the amount of time that was propagated from the
+		child's children to the function.
+
+     called	This is the number of times the function called
+		this child `/' the total number of times the child
+		was called.  Recursive calls by the child are not
+		listed in the number after the `/'.
+
+     name	This is the name of the child.  The child's index
+		number is printed after it.  If the child is a
+		member of a cycle, the cycle number is printed
+		between the name and the index number.
+
+ If there are any cycles (circles) in the call graph, there is an
+ entry for the cycle-as-a-whole.  This entry shows who called the
+ cycle (as parents) and the members of the cycle (as children.)
+ The `+' recursive calls entry shows the number of function calls that
+ were internal to the cycle, and the calls entry for each member shows,
+ for that member, how many times it was called from other members of
+ the cycle.
+
+Copyright (C) 2012 Free Software Foundation, Inc.
+
+Copying and distribution of this file, with or without modification,
+are permitted in any medium without royalty provided the copyright
+notice and this notice are preserved.
+
+Index by function name
+
+  [29] add_explosion          [16] draw_explosions        [20] has_winner_team
+  [36] clean_plugins          [39] draw_introduction      [43] initialize_graphical_paramters
+  [11] collision_between_starships [8] draw_missile       [44] initialize_graphical_paramters_extra
+  [12] collision_starship_missile [17] draw_missiles      [45] initialize_plugins
+   [5] collision_starship_wall [32] draw_selection_space  [21] move_missiles
+  [13] collision_starships_wall [2] draw_space             [7] move_starship
+  [37] create_graphical_window [6] draw_starship          [22] move_starships
+  [27] create_missile         [18] draw_starships         [31] nb_sharship_in_game
+  [30] create_small_explosion [19] end_frame_resolution   [33] nb_team_in_game
+  [34] create_starship        [10] erase_graphical_window [23] relaod_starships_gun
+  [14] decision_maker_starship [40] free_graphical_paramters [24] resolve_explosion
+  [15] display_fps            [41] free_graphical_window  [25] save_frame_information
+   [1] display_menu           [42] free_space              [4] scale_point
+  [38] display_win             [9] get_absolute_time      [28] shot_starship
+  [26] draw_explosion         [35] get_random_position_without_colision

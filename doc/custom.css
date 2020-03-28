@@ -1,0 +1,63 @@
+body {
+        background-color: #CCC;
+        color: black;
+        margin: 0;
+        font-size:13pt;
+}
+
+div.contents {
+        margin-bottom: 10px;
+        padding: 12px;
+        margin-left: auto;
+        margin-right: auto;
+        width: 90%;
+        background-color: white;
+        border-radius: 8px;
+        font-size:13pt;
+}
+
+p {
+        font-size:13pt;
+        padding: 20px;
+}
+
+div.contents {
+        font-size:13pt;
+}
+
+div.toc {
+        font-size:13pt;
+}
+
+.line{
+        font-size:13pt;
+}
+
+.fragment {
+        padding: 5px;
+        font-size:13pt;
+}
+
+li {
+        font-size:13pt;
+}
+
+li.level1 {
+        font-size:13pt;
+}
+
+li.level2 {
+        font-size:13pt;
+}
+
+#titlearea {
+        background-color: white;
+}
+
+hr.footer {
+        display: none;
+}
+
+.footer {
+        background-color: #AAA;
+}

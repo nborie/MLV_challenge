@@ -1,0 +1,367 @@
+/**
+ * \mainpage Starship Code Contest Documentation
+ *
+ * \tableofcontents
+ *
+ * \section intro Introduction
+ *
+ * The Starship Code Contest is a graphical arena bot game written in
+ * C. The game exploits fully the graphical library libMLV written by
+ * Adrien Boussicault and Marc Zipstein. The game present an
+ * Application Programming Interface for allowing any programmer to
+ * add its own bot which will can figth inside the game. Each starship
+ * in the game is piloted by a plugin (a dynamic libray as a linux
+ * shared object) which is automatically dynamically loaded during the
+ * launch of the programm. The game can be described as a real time
+ * strategy game as the graphical interface display 32 frames per
+ * seconds and actions can be resolve at each frame.
+ *
+ * As the bot have to able to play alone or inside a team, the motto
+ * of the game is : "Search and destroy yes... But destroy the right
+ * one"
+ *
+ *
+ * \section process How the game processes
+ *
+ * They are three important step during the execution of an instance
+ * of the game. Chronoligycally, the game initializes the plugins
+ * found, proposes the user the constitution of teams and finishes by
+ * displaying the resulted fight on the screen.
+ *
+ *
+ * \subsection Launch Launching the game
+ *
+ * The game can be started using the command `./starshipcode` in a
+ * terminal located in the proper directory. The program first
+ * initializes a lot of objects for the graphic interface (images
+ * loading, explosions loading...) and scans the shared object living
+ * in the directory `plugins`. The filter applied on the on the
+ * scandir (man section 3) function just select file whose name end by
+ * the three characters `.so`. It is thus advised to not copy file in
+ * this directory with a such name not being a dynamic library. We
+ * recall that valid C dynamic library must be compiled in two step :
+ * a first compilation to generate an object file containing non
+ * linked and position independent code (options -c and -fPIC), a
+ * second line of compilation with the option -shared to wrap the
+ * object file in a Linux shared object file. All shared objects are
+ * scanned by utilities provided by <dlfcn.h> in order to find three
+ * symbols (function pointers) setting the behavior of a starship.
+ *
+ *
+ * The terminal may present some verbose during the loading of plugins as follow :
+ *
+ *
+ * @code
+ * nborie@perceval:~/Enseignement/projets_informatique/langage_C/starshipcode/ > ./starshipcode 
+ * STARSHIP CODE CONTEST
+ * Auto-loading of plugins...
+ * 5 potential plugins founds : 
+ * - circle_rand_shot.so... loading OK
+ * - full_dummy.so... loading OK
+ * - rand_all.so... loading OK
+ * - rand_move.so... loading OK
+ * - rand_shot.so... loading OK
+ * @endcode
+ *
+ *
+ * TODO : CHANGE THAT FOR A BETTER INTRODUCTION SCREEN. I HATE DRAWING !!!!
+ *
+ * \image html intro.png "Starting screen" width=10cm
+ *
+ * The program propose a starting screen to introduce the game. After
+ * hitting a key or a mouse button, the selection screen pops.
+ *
+ *
+ * \subsection selection The selection of plugins
+ *
+ * Before seeing the game in action, the user must now constitute at
+ * least two teams before starting the fight. Among all scanned shared
+ * objects, the user can select available and well loaded plugin. Each
+ * plugin can have a single corresponding starship during a
+ * fight. This restrictive law is required since initialization and
+ * clean functions of plugins take no arguments and return void. In this
+ * sense, the use of static variables in plugins are strongly
+ * encouraged but prevent from multiple usages of a same A.I. during a
+ * fight. 
+ *
+ * The following screen shot display the selection screen.
+ *
+ * \image html selection_screen.png "Selection screen" width=10cm
+ *
+ * Plugins are listed on the left. The user can select up to 12
+ * plugins and forms up to 12 teams with the selected plugins. One
+ * there exist at least two different teams, the user can star the
+ * game (otherwise, a click on the start button should have no
+ * effect). That is now fighting time...
+ *
+ *
+ * \subsection Fight Fighting time!
+ *
+ *
+ * The game space is a square of size 800 pixels. The screen is split
+ * in two part : on the left the game space and contextual menu on the
+ * right. 
+ *
+ *
+ * \image html "fight_screen.png" "Fight screen 1" width=10cm
+ *
+ *
+ * A point of the space is internally describe with double floating
+ * number coordinates. Abscissa and ordinate can go from 0.0 to 10.0
+ * but these bound are not absolutes since some side effects can
+ * happen during collision resolution. The collisions between a
+ * starship and a border follow the law of reflections. The incidence
+ * angle is thus equal to the reflection angle. The collision between
+ * two starships follow a law looking like the elastic choc of
+ * particles with no mass. That means the dispersion angle can be
+ * obtains with the arctangent of the slope between the two center of
+ * the concerned starships. Using the library <math.h> to program a
+ * smart plugin is not an option, it is a real necessity.
+ *
+ *
+ * \image html "fight_screen_2.png" "Fight screen 2" width=10cm
+ *
+ * The right menu display the remaining life of alive starships in
+ * green and the damaged part in red. Dead starships are listed by
+ * plugin name on the right of the menu. At the very bottom of the
+ * menu, it is displayed the frame number (from 0 to 31) and each
+ * second, a percent describing the charge of computation. As this
+ * percent of busyness is lower than 100, the program handle the 32
+ * frames per second. If a bad plugin make the program busy, this
+ * charge information help the user to identify poor A.I. Each frame,
+ * all plugin are consulted for decision making before the end frame
+ * resolution which resolve moves, collisions, explosions, gun status,
+ * radar status and shots. The graphical part of the program is the
+ * heavy part of computation (MLV_actualise_window in particular). The
+ * calculus part remained most of the time negligible behind graphic
+ * parts so a plugin can compute a lot of things each frame.
+ *
+ *
+ * \section api Application Programming Interface
+ *
+ * Here is now time to learn how to program your own starship.
+ *
+ * \subsection acquisition The acquisition module 
+ *
+ * Any starship must collect information for smart decision
+ * making. These information can be get with two manner : the part
+ * concerning your own status (A starship know its team, its gear,
+ * where its radar is looking to...) and the part concerning the rest
+ * of the space which can be get by using your radar. Radar and gun
+ * turn faster than body of starship and a smart plugin could be able
+ * to remember parts of space it has scan before (static memory in
+ * shared object one more time). 
+ *
+ *
+ * Here is the source code of the header of the acquisition module :
+ *
+ * @code
+ * #ifndef _ACQUISITION_
+ * #define _ACQUISITION_
+ *
+ * typedef struct{
+ *   int move;
+ *   double angle_starship;
+ *   double angle_gun;
+ *   double angle_radar;
+ *   int shot;
+ * }Decision_frame;
+ * 
+ * typedef struct{
+ *   double x;
+ *   double y;
+ *   double angle_move;
+ *   int speed;
+ *   int nb_team;
+ * }View_starship;
+ * 
+ * typedef struct{
+ *   double x;
+ *   double y;
+ *   double angle_move;
+ * }View_missile;
+ * 
+ * typedef void (*AI)(Decision_frame* f);
+ * 
+ * double get_x(char* me); 
+ * double get_y(char* me); 
+ * int get_life(char* me); 
+ * int get_speed(char* me); 
+ * int get_nb_team(char* me); 
+ * int get_gun_status(char* me); 
+ * double get_move_angle(char* me); 
+ * double get_gun_angle(char* me); 
+ * double get_radar_angle(char* me); 
+ *
+ * void get_scan_from_radar(char* me, View_starship** S, int* nb_starship, View_missile** M, int* nb_missile); 
+ *
+ * #endif
+ * @endcode
+ *
+ * `me` is a C string (char*) which must point to the string equal to
+ * the name of your shared object. This technically requirement is due
+ * the fact that the acquisition module need to identify the caller
+ * but C is not an oriented object language (for which the caller
+ * `this` or `self` is easily accessible). Don't try to cheat, a call
+ * to these functions with another name than the name of your plugin
+ * can produce some casualties. As the variable `me` could be use in
+ * each call to an acquisition function, it is therefore advise to
+ * place your shared object name in a nice static variable that could
+ * be then used in each function of your plugin.
+ *
+ *
+ * \subsection symbols The required symbols
+ *
+ * A plugin MUST implement three functions to be loadable : 
+ *
+ * @code
+ * void decision_frame(Decision_frame* d);
+ * void initialize_my_AI(void);
+ * void clean_my_AI(void);
+ * @endcode
+ *
+ * The function `decision_frame` is the core of the plugin (and can
+ * evidently call a lot of another function of your plugin). Each
+ * frame during end frame resolution, this function will be called to
+ * determine what is the future behavior of your starship. The
+ * function must modify the structure in parameter but MUST respect
+ * some page of values.
+ *
+ * A starship can change its gear (neutral, front and reverse). When
+ * the plugin want to change the speed, a starship must respect a
+ * frame neutral between changing from front to reverse. A starship
+ * can change each frame of direction but only of 0.05 radian each
+ * frame. Gun and radar can turn faster up to the amount of 0.15
+ * radian per frame. A starship can use its gun only when this last
+ * one is reloaded. The launched missile has for direction the angle
+ * of the gun at the frame of fire.
+ *
+ *
+ * \subsection plugin Writing its own plugin
+ *
+ * A minimal plugin is illustrated by the full_dummy.so plugin example :
+ *
+ * @code
+ * #include "../includes/acquisition.h"
+ * 
+ * void decision_frame(Decision_frame* d){
+ * }
+ * 
+ * void initialize_my_AI(void){
+ * }
+ * 
+ * void clean_my_AI(void){
+ * }
+ * @endcode
+ *
+ * The resulted starship will do nothing during a game. It will stay
+ * at its random starting position and wait for its explosion.
+ *
+ *
+ * A such plugin whose source code live in a life full_dummy.c can be
+ * compiled with the following two line of compilation executed in the
+ * main directory of the project :
+ *
+ * @code
+ * gcc -fPIC -c plugins/full_dummy.c -o plugins/full_dummy.o
+ * gcc -shared -o plugins/full_dummy.so plugins/full_dummy.o bin/acquisition.o
+ * @endcode
+ *
+ * The compilation and its linking part required the object
+ * `bin/acquisition.o` which have been also compiled with the option
+ * -fPIC making the plugin completely position independent. Be aware
+ * that mixing static variables and position independent code can
+ * produce serious problem on some architecture. Anyway, the program
+ * have been largely tested.
+ *
+ *
+ * \subsection radar Use of the radar
+ *
+ * Advanced plugins analyse the space to get information and take the
+ * best solution of positionning and shoting. For that, the associated
+ * starship must use fully the radar. A relatively dummy plugin show
+ * you how to get information from the radar : rand_move_info.c
+ *
+ * 
+ * Most of acquisition functions return about yourself. The last
+ * function of acquisition prepares for you information that you radar
+ * can reach.
+ *
+ * @code
+ * void get_scan_from_radar(char* me, View_starship** S, int* nb_starship, View_missile** M, int* nb_missile);
+ * @endcode
+ *
+ * Don't worry about allocation, the acquisition module does it for
+ * you! You just have to give to this acquisition function two address
+ * of integer and two modifiable address of arrays : one of
+ * `View_starship` array (View_starship**) and another for an array of
+ * `View_missile` (View_missile**). Once executed, the variable `*S`
+ * will point to a proper array compose of `*nb_starship` element of
+ * type `View_starship` and `*M` will be the address of an array of
+ * `View_missile` containing `*nb_missile` element.
+ *
+ * As this function will set same values you will call it several
+ * times during the same frame, a nice solution consist in placing
+ * information in static variables of your plugin. Your plugin is not
+ * optimized if you call this function more than a single time each
+ * frame.
+ *
+ *
+ * \section game Game details and rules
+ *
+ * Here is a recall of some rules for this game. Respect them if you
+ * don't want the shame falling on you and your descendants for
+ * several generations :
+ *
+ *
+ * - A plugin must not reduced too largely the charge of the execution.
+ *
+ * - A plugin must not try to get information it doesn't deserve to get.
+ *
+ * - A starship should not destroy its allies.
+ *
+ * - A starship could try to save allies by intercepting missiles with
+ * its body but... That can be done so long and it can be very
+ * difficult to program.
+ *
+ * - Static variables are not very smart but wrapped in a shared object
+ * stay locally in your code (they will not loaded by the plugin
+ * loader...).
+ *
+ * - A nice plugin respect the values imposed during decision making.
+ *
+ *
+ *
+ *
+ *
+ * \section action It is time to action
+ *
+ *
+ * Here is a natural way to develop your own starship.
+ *
+ * - Step 1 : recall high school curse of trigonometry (sin, cos, tan, asin, acos, atan, ...)
+ * - Step 2 : recall high school curse of trigonometry (sin, cos, tan, asin, acos, atan, ...)
+ * - Step 3 : is identical to step 2
+ * - Step 4 : recall high school lesson about barycenter (useful for positioning...)
+ * - Step 5 : the law of classical physics are your friends
+ * - Step 6 : Program and win!
+ *
+ * Such an easy and light plan...
+ *
+ * \section bugs Known bugs and improvements suggestions
+ *
+ * Please report bug by sending a mail and the precise conditions
+ * which make the apparition of the bug at the address < nicolas dot
+ * borie at u-pem dot fr >. If you have suggestions of improvements,
+ * you are also invited to send them at the same address.
+ *
+ *
+ * "Celui qui programme ses jeux s'amuse deux fois." @ Jacques Arsac
+ *
+ *
+ * Have fun !!!!!!!!!!!!!!
+ *
+ * \version 0.1
+ * \author Nicolas Borie ( nicolas dot borie at u-pem dot fr )
+ * \date 10 march 2014
+ */
