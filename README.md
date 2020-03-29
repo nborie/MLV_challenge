@@ -64,4 +64,18 @@ lorsque l'on a fini son travail de classe standard de manière
 générale.
 
 
+## Les changements de code mineur de l'arène 
+
+La rétro-compatibilité ne sera jamais cassé pour les plugins (les
+AI). En gros, le module acquisition.h ne bougera pas. L'arène pourra
+évoluer juste pour devenir plus agréable.
+
+
+Amélioration à venir :
+
+
+* colorisation par équipe : https://github.com/nborie/MLV_challenge/issues/1
+
+
+
 N. Borie
