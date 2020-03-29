@@ -23,7 +23,7 @@ démonstration. Il suffit de faire make pour construire tout le
 projet. Une vieille documentation horrible (qui n'a jamais été
 terminée est disponible ici (cette vieille doc n'est rien d'autre
 qu'un début de doxygen inclus dans le dépôt):
-https://nborie.github.io/MLV_challenge/doc/html/
+[documentation doxygen](https://nborie.github.io/MLV_challenge/doc/html/)
 
 
 ## Quelques règles... 
@@ -74,7 +74,7 @@ AI). En gros, le module acquisition.h ne bougera pas. L'arène pourra
 Amélioration à venir :
 
 
-* colorisation par équipe : https://github.com/nborie/MLV_challenge/issues/1
+* [colorisation par équipe](https://github.com/nborie/MLV_challenge/issues/1)
 
 
 
