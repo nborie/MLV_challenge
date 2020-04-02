@@ -35,7 +35,7 @@ typedef struct starship{
   int reload;            /*!< The state of the gun (ready to fire or relaoding). */
   int nb_team;           /*!< The number of the team. */
   int life;              /*!< The life of the starship. */
-  struct plugin* plugin;
+  struct _plugin* plugin;
   struct starship *next; /*!< A pointeur to the next Starship. */
 }Starship;               /*!< Alias for struct starship. */
 
@@ -74,17 +74,6 @@ typedef struct{
   int frame_number;  /*!< The number of the current frame. */
   int busy;          /*!< An integer between 0 and 100 measuring the charge of the program. */
 }Space;
-
-
-typedef struct plugin{
-  char* name;
-  Starship* starship;
-  AI decision_frame;
-  void (*init)(void);
-  void (*clean)(void);
-  int ok;
-  int selected;
-}Plugin;
 
 
 Starship* create_starship(S_list L, int nb_team);

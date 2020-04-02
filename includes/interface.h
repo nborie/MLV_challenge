@@ -3,6 +3,7 @@
 
 #include <MLV/MLV_all.h>
 #include "game.h"
+#include "plugins.h"
 
 #define NB_PIXEL_SPACE_WIDTH 800
 #define NB_PIXEL_SPACE_HEIGHT 800
@@ -33,6 +34,6 @@ void scale_point(ParamInterface* gp, int *x, int *y, const double *abs, const do
 void display_win(int nb_team);
 void free_graphical_paramters(ParamInterface* gp);
 void draw_introduction(ParamInterface* gp);
-int draw_selection_space(ParamInterface* gp, Plugin* plugins, int nb_plugin, Space* W);
+int draw_selection_space(ParamInterface* gp, List plugins, Space* W);
 
 #endif
