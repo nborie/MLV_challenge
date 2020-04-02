@@ -50,6 +50,6 @@ typedef struct _plugin {
 } Plugin;
 
 void Plugin_free(Plugin* self);
-List Plugin_load_all(char* directory);
+LIST_OF(Plugin) Plugin_load_all(char* directory);
 
 #endif

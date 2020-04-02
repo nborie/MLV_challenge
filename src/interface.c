@@ -319,7 +319,7 @@ void draw_introduction(ParamInterface *gp)
     MLV_wait_keyboard_or_mouse(NULL, NULL, NULL, NULL, NULL);
 }
 
-int draw_selection_space(ParamInterface *gp, List plugins, Space *W)
+int draw_selection_space(ParamInterface *gp, LIST_OF(Plugin) plugins, Space *W)
 {
     int i;
     int x, y;

@@ -23,7 +23,7 @@ Exception load_entry_point(void* handle, char* name, OUTPUT_ANY_FUNC(output));
 Exception open_plugin(char* path, char* name, OUTPUT_ANY_OBJECT(output));
 Exception load_plugin(Plugin* plugin, String* path);
 
-List Plugin_load_all(char* directory)
+LIST_OF(Plugin) Plugin_load_all(char* directory)
 {
 
     printf("Starting plugins auto-loading from directory '%s'.\n", directory);
@@ -32,7 +32,7 @@ List Plugin_load_all(char* directory)
     int n = _discover_plugins("plugins", &plugins_entries);
     printf("Potential plugins found : %d\n", n);
 
-    List plugins = List_new();
+    LIST_OF(Plugin) plugins = List_new();
 
     RANGE(i, 0, n, 1)
     {

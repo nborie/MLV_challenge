@@ -75,6 +75,9 @@ void List_clear(List self, Boolean free_content, AnyConsumer custom_free);
    simple free by default) */
 void List_free(List self, Boolean free_content, AnyConsumer custom_free);
 
+/* Easy way to declare a (fake)-typed list (to improve readability). */
+#define LIST_OF(t) List
+
 /* Easy way to get a strongly typed element from a list at a given position. */
 #define LIST_GET(t,l,i) ((t) List_get(l, i))
 

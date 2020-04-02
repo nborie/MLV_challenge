@@ -32,7 +32,7 @@ int main(int argc, char** argv)
     INIT_RANDOM();
 
     /* auto-load available plugins */
-    List plugins = Plugin_load_all("plugins/");
+    LIST_OF(Plugin) plugins = Plugin_load_all("plugins/");
     if (LIST_EMPTY(plugins))
         THROW_UNFORMATTED_AND_KILL("No plugin found.", "Cannot start the challenge.");
 

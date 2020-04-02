@@ -89,12 +89,12 @@ String* String_concat_raw_raw(char* self, char* other)
 
 }
 
-List String_split(String* self, char separator, Boolean keep_empty_tokens)
+LIST_OF(String) String_split(String* self, char separator, Boolean keep_empty_tokens)
 {
 
     REQUIRE_NON_NULL(self);
 
-    List tokens = List_new();
+    LIST_OF(String) tokens = List_new();
 
     int start = 0, index;
     for (index = 0; index < STR_LEN(self); index++)
