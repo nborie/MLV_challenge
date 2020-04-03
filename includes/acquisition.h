@@ -11,22 +11,6 @@
 #define _ACQUISITION_
 
 /**
- * \struct Decision_frame
- * \brief This structure gathers the information needed to pilot a starship each frame.
- *
- * Each frame, an A.I. can change the gear, change the angle move of
- * the starship, turn the gun and the radar and use its gun to shot
- * when this last one is reloaded.
- */
-typedef struct{
-  int move;               /*!< An integer for the gear : 0 neutral, 1 front gear, -1 reverse. */
-  double angle_starship;  /*!< Turning angle : from -0.05 to 0.05 radian each frame. */
-  double angle_gun;       /*!< Turning the gun : from -0.15 to 0.15 radian each frame. */
-  double angle_radar;     /*!< Turning the radar : from -0.15 to 0.15 radian each frame. */
-  int shot;               /*!< An integer for the use of the gun : 1 to shot, 0 otherwise. */
-}Decision_frame;
-
-/**
  * \struct View_starship
  * \brief This structure gathers information scaned by the radar about other starships.
  *
@@ -57,15 +41,6 @@ typedef struct{
   double y;           /*!< The position in ordinate of the missile : beetwen -1.0 and 11.0 (some side effects). */
   double angle_move;  /*!< The angle of move of the missile in radian. */
 }View_missile;
-
-/**
- * \struct AI
- * \brief The core objet on an A.I. handling the decision making.
- *
- * AI define a pointer function shortcut for the function handling the
- * decision making at each end of frame.
- */
-typedef void (*AI)(Decision_frame* f);
 
 /**
  * \fn double get_x(char* me)

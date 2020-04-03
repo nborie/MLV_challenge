@@ -1,12 +1,64 @@
 GCC=gcc
 CFLAGS=-Wall -ansi -O2
-OBJ=bin/main.o bin/game.o bin/interface.o bin/misc.o bin/acquisition.o
-HEADERS=includes/game.h includes/interface.h includes/misc.h includes/acquisition.h
 
-all: starshipcode plugins/full_dummy.so plugins/rand_all.so plugins/rand_move.so plugins/rand_shot.so plugins/circle_rand_shot.so plugins/rand_move_info.so
+OBJ=bin/util.lang.o \
+	bin/util.contract.o \
+	bin/util.func.o \
+	bin/util.list.o \
+	bin/util.str.o \
+	bin/util.error.o \
+	bin/util.misc.o \
+	bin/main.o \
+	bin/game.o \
+	bin/interface.o \
+	bin/acquisition.o \
+	bin/plugins.o
 
-starshipcode: $(OBJ)
-	$(GCC) -o starshipcode $(OBJ) $(CFLAGS) -lMLV -lm -ldl
+HEADERS=includes/util/lang.h \
+		includes/util/contract.h \
+		includes/util/func.h \
+		includes/util/list.h \
+		includes/util/str.h \
+		includes/util/error.h \
+		includes/util/misc.h \
+		includes/game.h \
+		includes/interface.h \
+		includes/acquisition.h \
+		includes/plugins.h
+
+PLUGINS=plugins/full_dummy.so \
+		plugins/rand_all.so \
+		plugins/rand_move.so \
+		plugins/rand_shot.so \
+		plugins/circle_rand_shot.so \
+		plugins/rand_move_info.so
+
+EXECUTABLE=starshipcode
+all: $(EXECUTABLE) $(PLUGINS)
+
+$(EXECUTABLE): $(OBJ)
+	$(GCC) -o $(EXECUTABLE) $(OBJ) $(CFLAGS) -lMLV -lm -ldl
+
+bin/util.lang.o: src/util/lang.c $(HEADERS)
+	$(GCC) -c src/util/lang.c -o bin/util.lang.o $(CFLAGS) -lMLV -ldl
+
+bin/util.contract.o: src/util/contract.c $(HEADERS)
+	$(GCC) -c src/util/contract.c -o bin/util.contract.o $(CFLAGS) -lMLV -ldl
+
+bin/util.func.o: src/util/func.c $(HEADERS)
+	$(GCC) -c src/util/func.c -o bin/util.func.o $(CFLAGS) -lMLV -ldl
+
+bin/util.list.o: src/util/list.c $(HEADERS)
+	$(GCC) -c src/util/list.c -o bin/util.list.o $(CFLAGS) -lMLV -ldl
+
+bin/util.str.o: src/util/str.c $(HEADERS)
+	$(GCC) -c src/util/str.c -o bin/util.str.o $(CFLAGS) -lMLV -ldl
+
+bin/util.error.o: src/util/error.c $(HEADERS)
+	$(GCC) -c src/util/error.c -o bin/util.error.o $(CFLAGS) -lMLV -ldl
+
+bin/util.misc.o: src/util/misc.c $(HEADERS)
+	$(GCC) -c src/util/misc.c -o bin/util.misc.o $(CFLAGS) -lMLV -ldl
 
 bin/main.o: src/main.c $(HEADERS)
 	$(GCC) -c src/main.c -o bin/main.o $(CFLAGS) -lMLV -ldl
@@ -20,8 +72,8 @@ bin/interface.o: src/interface.c includes/interface.h includes/game.h
 bin/acquisition.o: src/acquisition.c includes/acquisition.h
 	$(GCC) -fPIC -c src/acquisition.c -o bin/acquisition.o $(CFLAGS)
 
-bin/misc.o: src/misc.c includes/misc.h
-	$(GCC) -c src/misc.c -o bin/misc.o $(CFLAGS) -lrt
+bin/plugins.o: src/plugins.c includes/plugins.h
+	$(GCC) -c src/plugins.c -o bin/plugins.o $(CFLAGS) -lrt
 
 #############################
 #     Plugins examples      #
@@ -51,10 +103,10 @@ plugins/rand_move_info.so: plugins/rand_move_info.c bin/acquisition.o
 	$(GCC) -shared -o plugins/rand_move_info.so plugins/rand_move_info.o bin/acquisition.o $(CFLAGS)
 
 clean:
-	rm bin/*.o
-	rm plugins/*.o
-	rm plugins/*.so
-	rm starshipcode
+	rm -f bin/*.o
+	rm -f plugins/*.o
+	rm -f plugins/*.so
+	rm -f starshipcode
 	rm -f */*~
 	rm -f *~
 

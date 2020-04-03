@@ -1,4 +1,5 @@
 #include "../includes/game.h"
+#include "../includes/plugins.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
@@ -338,7 +339,7 @@ int has_winner_team(S_list L){
 void decision_maker_starship(S_list L, M_list* M){
   Starship* current=L;
   Decision_frame current_decision;
-  AI f;
+  Decidor f;
   
   while(current != NULL){
     current_decision.move = 0;
@@ -347,7 +348,7 @@ void decision_maker_starship(S_list L, M_list* M){
     current_decision.angle_radar = 0.0;
     current_decision.shot = 0;  
 
-    f = (*(AI)(current->plugin->decision_frame));
+    f = (*(Decidor)((current->plugin->ai).take_decision));
     f(&current_decision);
     current->shot = current_decision.shot;
     current->move = current_decision.move;
@@ -426,7 +427,7 @@ void initialize_plugins(S_list S){
   Starship* s = S;
 
   while(s != NULL){
-    (s->plugin->init)();
+    ((s->plugin->ai).init)();
     s = s->next;
   }
 }
@@ -435,7 +436,7 @@ void clean_plugins(S_list S){
   Starship* s = S;
 
   while(s != NULL){
-    (s->plugin->clean)();
+    ((s->plugin->ai).clean)();
     s = s->next;
   }
 }
